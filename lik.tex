@@ -25,6 +25,17 @@
 \usepackage{tikz}
 \usetikzlibrary{angles,quotes,babel,calc}
 
+
+\usepackage{xsim}
+% Don't print where you write them:
+\xsimsetup{
+  exercise/within = section,
+  exercise/the-counter = \thesection.\arabic{exercise},
+  exercise/name = {Практыкаваньне },
+  exercise/print = true,
+  solution/print = false,
+  solution/name = {Разьвязаньне },
+}
 \usepackage[explicit]{titlesec}
 \setmainfont{Exo2-Light.ttf}
 \newfontfamily\captfont{Exo2-Black.ttf}
@@ -274,6 +285,56 @@ $\epsilon$ --- бясконца маленькі лік, то да хмары, �
 дзе ў лічніку мы скарысталіся пачаткам формулы бінома Ньютана, адкінуўшы ўсе
 складнікі з квадратамі і вышэйшымі ступенямі $dx$.
 
+\begin{exercise}
+  Знайдзіце $(cx)'$, дзе $c$ --- канстанта.
+\end{exercise}
+\begin{solution}
+  \begin{equation*}
+    (cx)' = \frac{c(x+dx) - cx}{dx} = \frac{cx + cdx - cx}{dx} = c.
+  \end{equation*}
+\end{solution}
+
+\begin{exercise}
+  Знайдзіце $(cf(x))'$, дзе $c$ --- канстанта, а $f$ --- пэўная функцыя.
+\end{exercise}
+\begin{solution}
+  \begin{equation*}
+    (cx)' = \frac{cf(x+dx) - cf(x)}{dx} = c\frac{f(x + dx) - f(x)}{dx} = cf'(x).
+  \end{equation*}
+\end{solution}
+
+\begin{exercise}
+  Знайдзіце $(x^3)'$ непасрэдна.
+\end{exercise}
+\begin{solution}
+  \begin{equation*}
+    (x^3)' = \frac{(x+dx)^3 - x}{dx} = \frac{x^3 + 3x^2dx + 3x (dx)^2 + (dx)^3 -
+      x^3}{dx} = 3x^2 + 3x dx + (dx)^2 = 3x^2.
+  \end{equation*}
+\end{solution}
+
+\begin{exercise}
+  Знайдзіце $(\sqrt{x})'$.
+\end{exercise}
+\begin{solution}
+  \begin{multline*}
+    (\sqrt{x})' = \frac{\sqrt{x+dx} - \sqrt{x}}{dx} = \frac{(\sqrt{x+dx} -
+      \sqrt{x})(\sqrt{x+dx} + \sqrt{x})}{dx(\sqrt{x+dx} + \sqrt{x})} = \\ =
+    \frac{x + dx - x}{dx(\sqrt{x+dx} + \sqrt{x})} = \frac{1}{(\sqrt{x+dx} +
+      \sqrt{x})} = \frac{1}{2\sqrt{x}}.
+  \end{multline*}
+
+  Падобны прыём, дамнажэньне і дзяленьне выразу выгляду $a + b$ (альбо $a - b$)
+  на $a - b$ (адпаведна, $a + b$), каб атрымалася рознасьць квадратаў $a^2 -
+  b^2$, --- вельмі распаўсюджаны і карысны прыём. Ён дазваляе пазбаўляцца лішніх
+  каранёў і іншых рэчаў, зь якімі працаваць нязручна.
+
+  У выразе $\frac{1}{(\sqrt{x+dx} + \sqrt{x})}$ мы можам адкінуць $dx$, паколькі
+  нас цікавіць канечны вынік, а бясконца маленькая велічыня тут нічога ўжо не
+  зьмяняе.
+\end{solution}
+
+
 \section{Формулы з вытворнымі}
 
 Цяпер мы можам палічыць вытворную сумы дзьвюх функцый. Калі $h(x) = f(x) +
@@ -418,7 +479,7 @@ g'(x)dx$, запісваем
 \frac{1}{2}$. Адкрыю таямніцу: гэтая формула дзейнічае для любога $n$, потым мы
 гэта пакажам.
 
-\section{Паказьнікавая функцыя}
+\section{Паказьнікавая функцыя і лягарытм}
 
 Чытач павінен упэўнена ўзводзіць рэчаісныя лікі ў цэлыя і рацыянальныя
 ступені. На ўсялякі выпадак нагадаю, як гэта робіцца:
@@ -503,7 +564,7 @@ $0'=0$ (хуткасьць машыны, якая стаіць, роўная н�
 Якія ўласьцівасьці мае нашая новая функцыя? Дзеля прыкладу, паспрабуем палічыць
 $\exp(a+b)$:
 \begin{equation*}
-  \exp(a+b) = 1 + (a+b) + \frac{1}{2}(a+b)^2 + \frac{1}{3}(a+b)^3 + \dots
+  \exp(a+b) = 1 + (a+b) + \frac{1}{2}(a+b)^2 + \frac{1}{2 \cdot 3}(a+b)^3 + \dots
 \end{equation*}
 
 Як выглядае агульны складнік $\frac{1}{i!}(a+b)^i$? Лічым:
@@ -549,7 +610,56 @@ $f(x) = (f(1))^x$ для любога рэчаіснага $x$.
 $x$. Лік $\exp(1)$ пазначаюць літарай $e$, і гэты лік --- адна з найважнейшых
 матэматычных канстант:
 \begin{equation*}
-  e = \exp(1) = 1 + 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{i!} + \dots.
+  e = \exp(1) = 1 + 1 + \frac{1}{2} + \frac{1}{2 \cdot 3} + \dots + \frac{1}{i!} + \dots.
 \end{equation*}
+
+Цяпер мы можам знайсьці $(a^x)'$, прычым ажно двума спосабамі. Заўважым, што
+$a^{x} = e^{x\ln a}$, дзе $\ln a$ --- гэта лягарытм.
+\begin{equation*}
+  \frac{a^{dx} - 1}{dx} = \frac{e^{dx \ln a} - 1}{dx} = \frac{1 + dx \ln a -
+    1}{dx} = \ln a,
+\end{equation*}
+дзе мы выкарысталі формулу для $e^{x}$ і пры гэтым адразу адкінулі ўсе ступені
+$dx$, пачынаючы ад квадрату. Канчаткова маем
+\begin{equation*}
+  (a^{x})' = a^{x} \ln a.
+\end{equation*}
+
+Вытворную $a^{x}$ можна знайсьці і па-іншаму, выкарыстаўшы агульныя формулы і
+той факт, што $(e^x)' = e^x$:
+\begin{equation*}
+  (a^{x})' = (e^{x \ln a})' = e^{x \ln a} \ln a = a^{x} \ln a,
+\end{equation*}
+дзе мы скарысталіся формулай вытворнай кампазыцыі і вытворнай функцыі,
+памножанай на канстанту.
+
+Даволі лёгка знайсьці вытворную лягарытму (тут $y = \ln x$):
+\begin{equation*}
+  (\ln x)' = \frac{1}{(e^y)'} = \frac{1}{e^y} = \frac{1}{e^{\ln x}} =
+  \frac{1}{x}.
+\end{equation*}
+
+\section{Трыганамэтрычныя функцыі}
+
+Зоймемся цяпер трыганамэтрычнымі функцыямі. Для пачатку знойдзем $(\sin x)'$:
+\begin{equation*}
+  (\sin x)' = \frac{\sin(x + dx) - \sin x}{dx} = \frac{\sin x \cos dx + \cos x
+    \sin dx - \sin x}{dx}.
+\end{equation*}
+У гэтым месцы можна было б паглядзець на рысунак, параўнаць даўжыню дугі з
+велічынёй сінуса і зразумець, чаму роўныя $\sin dx$ і $\cos dx$. Праблема такога
+падыходу ў тым, што можна нарысаваць рысунак, які пераканаўча паказвае як
+заўгодна няправільныя вынікі, а нават на нашым узроўні строгасьці, мы імкнемся
+да таго, каб у чытача не заставалася пачуцьця няяснасьці і падману. Так, мы шмат
+спрашчаем, але заўжды прыводзім разважаньне, якое можна зрабіць строгім.
+
+TODO: нарысаваць рысунак.
+
+\chapter{Разьвязаньні заданьняў}
+
+\ForEachUsedExerciseByType{%
+  \printsolution{#1}{#2}%
+}
+
 
 \end{document}
